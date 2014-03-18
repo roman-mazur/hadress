@@ -832,8 +832,16 @@ public class Settings {
 		try {
 			c = Class.forName(className);
 		} catch (ClassNotFoundException e) {
-			throw new SettingsError("Couldn't find class '" + className + "'"+ 
-					"\n" + e.getMessage(),e);
+      int dotIndex = name.indexOf('.');
+      if (dotIndex != -1) {
+        className = name.substring(dotIndex + 1);
+      }
+      try {
+        c = Class.forName(className);
+      } catch (ClassNotFoundException another) {
+        throw new SettingsError("Couldn't find class '" + className + "'"+
+            "\n" + e.getMessage(),e);
+      }
 		}
 		
 		return c;

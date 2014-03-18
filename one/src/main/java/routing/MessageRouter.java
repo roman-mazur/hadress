@@ -345,7 +345,7 @@ public abstract class MessageRouter {
 		
 		if (incoming == null) {
 			throw new SimError("No message with ID " + id + " in the incoming "+
-					"buffer of " + this.host);
+					"buffer of " + this.host + " Buffer: " + incomingMessages.keySet());
 		}
 		
 		incoming.setReceiveTime(SimClock.getTime());
@@ -363,21 +363,23 @@ public abstract class MessageRouter {
 		// If the application re-targets the message (changes 'to')
 		// then the message is not considered as 'delivered' to this host.
 		isFinalRecipient = aMessage.getTo() == this.host;
-		isFirstDelivery = isFinalRecipient &&
-		!isDeliveredMessage(aMessage);
+		isFirstDelivery = (isFinalRecipient || aMessage.isBroadcast())
+        && !isDeliveredMessage(aMessage);
 
-		if (!isFinalRecipient && outgoing!=null) {
-			// not the final recipient and app doesn't want to drop the message
-			// -> put to buffer
-			addToMessages(aMessage, false);
-		} else if (isFirstDelivery) {
-			this.deliveredMessages.put(id, aMessage);
-		} else if (outgoing == null) {
-			// Blacklist messages that an app wants to drop.
-			// Otherwise the peer will just try to send it back again.
-			this.blacklistedMessages.put(id, null);
-		}
-		
+    if (!isFinalRecipient && outgoing != null) {
+      // not the final recipient and app doesn't want to drop the message
+      // -> put to buffer
+      addToMessages(aMessage, false);
+    }
+
+    if (isFirstDelivery) {
+      this.deliveredMessages.put(id, aMessage);
+    } else if (outgoing == null) {
+      // Blacklist messages that an app wants to drop.
+      // Otherwise the peer will just try to send it back again.
+      this.blacklistedMessages.put(id, null);
+    }
+
 		for (MessageListener ml : this.mListeners) {
 			ml.messageTransferred(aMessage, from, this.host,
 					isFirstDelivery);
@@ -645,7 +647,11 @@ public abstract class MessageRouter {
 	 * @return The replicate
 	 */
 	public abstract MessageRouter replicate();
-	
+
+  public String getNodeInfo() {
+    return "";
+  }
+
 	/**
 	 * Returns a String presentation of this router
 	 * @return A String presentation of this router
@@ -655,4 +661,8 @@ public abstract class MessageRouter {
 			this.getHost().toString() + " with " + getNrofMessages() 
 			+ " messages";
 	}
+
+  public List<Connection> getActivatedConnections() {
+    return null;
+  }
 }

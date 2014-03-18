@@ -181,6 +181,10 @@ public class DTNHost implements Comparable<DTNHost> {
 		return lc;
 	}
 
+  public List<Connection> getActivatedConnections() {
+    return router.getActivatedConnections();
+  }
+
 	/**
 	 * Returns the current location of this host. 
 	 * @return The location
@@ -512,8 +516,12 @@ public class DTNHost implements Comparable<DTNHost> {
 	 * @return Host's name
 	 */
 	public String toString() {
-		return name;
+    return name;
 	}
+
+  public String getLabel() {
+    return name + " " + router.getNodeInfo();
+  }
 
 	/**
 	 * Checks if a host is the same as this host by comparing the object

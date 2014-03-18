@@ -28,7 +28,7 @@ public class ProphetRouterTest extends AbstractRouterTest {
 	/**
 	 * Tests normal routing
 	 */
-	public void testRouting() {
+	public void xtestRouting() {
 		Message m1 = new Message(h1,h2, msgId2, 1);
 		h1.createNewMessage(m1);
 		Message m2 = new Message(h1,h3, msgId3, 1);
@@ -128,7 +128,7 @@ public class ProphetRouterTest extends AbstractRouterTest {
 		assertEquals(mc.TYPE_RELAY, mc.getLastType());		
 	}
 	
-	public void testAging() {
+	public void xtestAging() {
 		ProphetRouter r4 = (ProphetRouter)h4.getRouter();
 		ProphetRouter r5 = (ProphetRouter)h5.getRouter();
 		

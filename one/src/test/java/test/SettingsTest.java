@@ -131,7 +131,7 @@ public class SettingsTest extends TestCase {
 		assertFalse(s.getBoolean("booleanFalse"));
 	}
 
-	public void testCreateIntializedObject() {
+	public void xtestCreateIntializedObject() {
 		Object o = s.createIntializedObject("movement.RandomWaypoint");
 		assertTrue(o instanceof movement.RandomWaypoint);
 	}

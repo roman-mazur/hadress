@@ -1,0 +1,36 @@
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+
+  <SeekBar
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_toLeftOf="@+id/radius_label"
+      android:layout_margin="5dp"
+      android:id="@+id/radius_bar" />
+
+  <TextView
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_alignParentRight="true"
+      android:id="@+id/radius_label"
+      android:layout_alignBottom="@id/radius_bar"
+      android:layout_marginRight="5dp"
+      android:paddingBottom="3dp"
+      android:textSize="16sp"
+      android:textColor="@android:color/white"
+      tools:text="120" />
+
+  <com.rmazur.address.ui.Board
+      android:id="@+id/board"
+      android:background="@android:color/white"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:layout_below="@id/radius_bar"
+      android:radius="120dp"
+      tools:context=".MainActivity" />
+
+</RelativeLayout>

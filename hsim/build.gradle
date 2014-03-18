@@ -1,0 +1,24 @@
+apply plugin: 'application'
+
+mainClassName = 'core.DTNSim'
+
+dependencies {
+  compile project(':one')
+  compile project(':haddress')
+}
+
+applicationDistribution.from("$projectDir") {
+  include '*.txt'
+  //exclude 'test*'
+  include '*.sh'
+}
+
+task runComparisons(type: Exec, dependsOn: tasks.installApp) {
+  workingDir tasks.installApp.destinationDir
+  commandLine './run-comparisons.sh'
+}
+
+task runTests(type: Exec, dependsOn: tasks.installApp) {
+  workingDir tasks.installApp.destinationDir
+  commandLine './run-tests.sh'
+}

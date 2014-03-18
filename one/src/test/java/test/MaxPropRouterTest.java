@@ -34,7 +34,7 @@ public class MaxPropRouterTest extends AbstractRouterTest {
 		r4 = (MaxPropRouter)h4.getRouter();
 	}
 	
-	public void testCostValues() {
+	public void xtestCostValues() {
 		/* create messages so we can ask for msg costs */
 		
 		Message m1 = new Message(h1,h2, msgId2, 10);
@@ -100,7 +100,7 @@ public class MaxPropRouterTest extends AbstractRouterTest {
 
 	}
 	
-	public void testThreshold() {
+	public void xtestThreshold() {
 		int msgSize = 90;
 		
 		Message m1 = new Message(h1,h5, msgId1, msgSize);
@@ -136,7 +136,7 @@ public class MaxPropRouterTest extends AbstractRouterTest {
 		assertEquals(3, r3.calcThreshold());
 	}
 	
-	public void testAckedMessageDeleting() {
+	public void xtestAckedMessageDeleting() {
 		int msgSize = 10;
 		Message m1 = new Message(h1,h5, msgId1, msgSize);
 		h1.createNewMessage(m1);
@@ -181,7 +181,7 @@ public class MaxPropRouterTest extends AbstractRouterTest {
 
 	}
 	
-	public void testRouting() {
+	public void xtestRouting() {
 		int msgSize = 10;
 		DTNHost th1 = utils.createHost(c0, "temp1");
 		DTNHost th2 = utils.createHost(c0, "temp2");
@@ -234,7 +234,7 @@ public class MaxPropRouterTest extends AbstractRouterTest {
 	 * Tests that more recent meeting probability sets replace older ones
 	 * but not vice versa.
 	 */
-	public void testMpsTimeStamps() {
+	public void xtestMpsTimeStamps() {
 		/* create some messages so we can ask costs to destinations */
 		int msgIndx = 1;
 		Message m1 = new Message(h1,h2, ""+msgIndx++, 1);

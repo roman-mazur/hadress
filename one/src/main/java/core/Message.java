@@ -87,7 +87,11 @@ public class Message implements Comparable<Message> {
 		Message.nextUniqueId++;
 		addNodeOnPath(from);
 	}
-	
+
+  public boolean isBroadcast() {
+    return to == null;
+  }
+
 	/**
 	 * Returns the node this message is originally from
 	 * @return the node this message is originally from

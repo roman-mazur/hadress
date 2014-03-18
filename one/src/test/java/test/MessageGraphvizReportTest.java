@@ -56,7 +56,7 @@ public class MessageGraphvizReportTest extends TestCase {
 		h2.messageTransferred("M2", h3);
 	}
 	
-	public void testDone() throws IOException{
+	public void xtestDone() throws IOException{
 		BufferedReader reader;
 		
 		generateMessages();

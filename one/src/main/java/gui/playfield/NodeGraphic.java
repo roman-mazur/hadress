@@ -4,8 +4,7 @@
  */
 package gui.playfield;
 
-import java.awt.Color;
-import java.awt.Graphics2D;
+import java.awt.*;
 import java.awt.geom.Ellipse2D;
 import java.util.ArrayList;
 import java.util.List;
@@ -28,6 +27,7 @@ public class NodeGraphic extends PlayFieldGraphic {
 	
 	private static Color rangeColor = Color.GREEN;
 	private static Color conColor = Color.BLACK;
+  private static Color conColorPassive = Color.GRAY;
 	private static Color hostColor = Color.BLUE;
 	private static Color hostNameColor = Color.BLUE;
 	private static Color msgColor1 = Color.BLUE;
@@ -87,22 +87,21 @@ public class NodeGraphic extends PlayFieldGraphic {
 		}
 
 		if (drawConnections) {
-			g2.setColor(conColor);
-			Coord c1 = node.getLocation();
-			ArrayList<Connection> conList = new ArrayList<Connection>();
-			// create a copy to prevent concurrent modification exceptions
-			conList.addAll(node.getConnections());
-			for (Connection c : conList) {
-				DTNHost otherNode = c.getOtherNode(node);
-				Coord c2;
-				
-				if (otherNode == null) {
-					continue; /* disconnected before drawn */
-				}
-				c2 = otherNode.getLocation();				
-				g2.drawLine(scale(c1.getX()), scale(c1.getY()),
-						scale(c2.getX()), scale(c2.getY()));
-			}
+      ArrayList<Connection> conList = new ArrayList<>(), passiveList = new ArrayList<>();
+      // create a copy to prevent concurrent modification exceptions
+      List<Connection> defaultConnections = node.getConnections();
+      List<Connection> activated = node.getActivatedConnections();
+      if (activated == null) {
+        conList.addAll(defaultConnections);
+      } else {
+        passiveList.addAll(defaultConnections);
+        conList.addAll(activated);
+      }
+
+      drawConnections(g2, passiveList, conColorPassive,
+          new BasicStroke(1, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER,
+              10, new float[] {10}, 0));
+      drawConnections(g2, conList, conColor, new BasicStroke(2));
 		}
 
 
@@ -119,12 +118,31 @@ public class NodeGraphic extends PlayFieldGraphic {
 		if (drawNodeName) {
 			g2.setColor(hostNameColor);
 			// Draw node's address next to it
-			g2.drawString(node.toString(), scale(loc.getX()),
+			g2.drawString(node.getLabel(), scale(loc.getX()),
 					scale(loc.getY()));
 		}
 	}
 
-	/**
+  private void drawConnections(Graphics2D g2, ArrayList<Connection> conList, Color color, Stroke stroke) {
+    g2.setColor(color);
+    Stroke lastStroke = g2.getStroke();
+    g2.setStroke(stroke);
+    Coord c1 = node.getLocation();
+    for (Connection c : conList) {
+      DTNHost otherNode = c.getOtherNode(node);
+      Coord c2;
+
+      if (otherNode == null) {
+        continue; /* disconnected before drawn */
+      }
+      c2 = otherNode.getLocation();
+      g2.drawLine(scale(c1.getX()), scale(c1.getY()),
+          scale(c2.getX()), scale(c2.getY()));
+    }
+    g2.setStroke(lastStroke);
+  }
+
+  /**
 	 * Sets whether radio coverage of nodes should be drawn
 	 * @param draw If true, radio coverage is drawn
 	 */

@@ -60,5 +60,4 @@ public class MessageTest extends TestCase {
 		assertEquals(value2, msg.getProperty("bar"));
 	}
 
-
 }

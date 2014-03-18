@@ -1,0 +1,7 @@
+<resources>
+
+  <declare-styleable name="Board">
+    <attr name="android:radius" />
+  </declare-styleable>
+
+</resources>

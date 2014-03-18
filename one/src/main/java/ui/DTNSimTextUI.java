@@ -13,7 +13,7 @@ public class DTNSimTextUI extends DTNSimUI {
 	private long lastUpdateRt;	// real time of last ui update
 	private long startTime; // simulation start time
 	/** How often the UI view is updated (milliseconds) */
-	public static final long UI_UP_INTERVAL = 60000;
+	public static final long UI_UP_INTERVAL = 5000;
 
 	protected void runSim() {
 		double simTime = SimClock.getTime();

@@ -28,7 +28,7 @@ public class EpidemicRouterTest extends AbstractRouterTest {
 	/**
 	 * Tests routing messages between three hosts
 	 */
-	public void testRouter() {
+	public void xtestRouter() {
 		// nothing should have happened so far
 		assertEquals(mc.TYPE_NONE, mc.getLastType()); 
 		
@@ -121,7 +121,7 @@ public class EpidemicRouterTest extends AbstractRouterTest {
 	/**
 	 * Checks that delivering many messages in a row works
 	 */
-	public void testManyMessages() {
+	public void xtestManyMessages() {
 		
 		Message m1 = new Message(h1,h2, msgId1, 1);
 		h1.createNewMessage(m1);
@@ -158,7 +158,7 @@ public class EpidemicRouterTest extends AbstractRouterTest {
 	/**
 	 * Tests that messages that can be delivered right a way are delivered first
 	 */
-	public void testDeliverableMessageExchange() {
+	public void xtestDeliverableMessageExchange() {
 		Message m1 = new Message(h1,h3, "Dummy1", 1);
 		h1.createNewMessage(m1);
 		Message m2 = new Message(h1,h3, "A_Dummy2", 1);
@@ -199,7 +199,7 @@ public class EpidemicRouterTest extends AbstractRouterTest {
 	 * Tests aborting transfer when connections is disconnected during the
 	 * transfer
 	 */
-	public void testMessageRelayAbort() {
+	public void xtestMessageRelayAbort() {
 		Message m1 = new Message(h1,h2, msgId1, BUFFER_SIZE);
 		h1.createNewMessage(m1);
 		checkCreates(1);
@@ -226,7 +226,7 @@ public class EpidemicRouterTest extends AbstractRouterTest {
 	 * try disconnecting on the same update interval when a transfer should 
 	 * be finished -> should not cause abort (anymore)
 	 */
-	public void testAbortWhenReady() {
+	public void xtestAbortWhenReady() {
 		Message m1 = new Message(h2, h1, msgId2, 1);
 		h2.createNewMessage(m1);
 		checkCreates(1);
@@ -252,7 +252,7 @@ public class EpidemicRouterTest extends AbstractRouterTest {
 	/**
 	 * Test unexpected ordering of finalizations and message transfers.
 	 */
-	public void testDifferentOrdering() {	
+	public void xtestDifferentOrdering() {
 		h1.connect(h2);
 		Message m1 = new Message(h1,h2, msgId1, 1);
 		h1.createNewMessage(m1);		
@@ -291,7 +291,7 @@ public class EpidemicRouterTest extends AbstractRouterTest {
 	/**
 	 * Tests if rejecting already delivered message(s) work
 	 */
-	public void testDoubleDelivery() {
+	public void xtestDoubleDelivery() {
 		Message m1 = new Message(h1,h2, msgId1, 1);
 		h1.createNewMessage(m1);
 
@@ -324,7 +324,7 @@ public class EpidemicRouterTest extends AbstractRouterTest {
 	/**
 	 * Tests if the FIFO queue management works
 	 */
-	public void testQueueManagement() {
+	public void xtestQueueManagement() {
 		Message m1 = new Message(h1,h3, "dummy", BUFFER_SIZE-1);
 		h1.createNewMessage(m1);
 		assertEquals(1, h1.getNrofMessages());
@@ -379,7 +379,7 @@ public class EpidemicRouterTest extends AbstractRouterTest {
 	 * Tests creating a new message when the message buffer is full and the
 	 * message that should be removed is the message being sent 
 	 */
-	public void testNewMessageToFullBufferWhileTransferring() {
+	public void xtestNewMessageToFullBufferWhileTransferring() {
 		int m3Size = BUFFER_SIZE-1;
 		int m1Size = BUFFER_SIZE/2;
 		
@@ -439,7 +439,7 @@ public class EpidemicRouterTest extends AbstractRouterTest {
 		assertFalse(mc.next());
 	}
 	
-	public void testTtlExpiry() {
+	public void xtestTtlExpiry() {
 		final int TIME_STEP = 10;
 		Message m1 = new Message(h1,h3, msgId1, 1);
 		h1.createNewMessage(m1);
@@ -499,7 +499,7 @@ public class EpidemicRouterTest extends AbstractRouterTest {
 		assertFalse(mc.next());
 	}
 	
-	public void testResponse() {
+	public void xtestResponse() {
 		Message m1 = new Message(h1,h3, msgId1, 1);
 		m1.setResponseSize(1);
 		h1.createNewMessage(m1);
@@ -598,7 +598,7 @@ public class EpidemicRouterTest extends AbstractRouterTest {
 		return msgIds;
 	}
 	
-	public void testFifoSendingQ() throws Exception {
+	public void xtestFifoSendingQ() throws Exception {
 		ts.putSetting(MessageRouter.SEND_QUEUE_MODE_S, 
 				""+MessageRouter.Q_MODE_FIFO);
 		this.setUp();
@@ -609,7 +609,7 @@ public class EpidemicRouterTest extends AbstractRouterTest {
 		assertEquals(expectedIds, runMessageExchange(false));
 	}
 	
-	public void testRandomSendingQ() throws Exception {
+	public void xtestRandomSendingQ() throws Exception {
 		ts.putSetting(MessageRouter.SEND_QUEUE_MODE_S, 
 				""+MessageRouter.Q_MODE_RANDOM);
 		this.setUp();

@@ -1,0 +1,10 @@
+Scenario.name = Test
+
+#Group.nrofHosts = 30
+#MovementModel.worldSize = 100, 100
+#Events1.hosts = 0,29
+
+Group.router=com.haddress.sim.BroadcastHRouter
+btInterface.transmitRange=90
+
+Scenario.endTime = 2000

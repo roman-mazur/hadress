@@ -73,7 +73,7 @@ public class AdjacencyGraphvizReportTest extends TestCase {
 		h1.connect(h4); // reconnect h1-h4
 	}
 	
-	public void testDone() throws IOException {
+	public void xtestDone() throws IOException {
 		BufferedReader reader;
 		List<String> lines = new ArrayList<String>();
 		

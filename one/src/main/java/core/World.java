@@ -254,6 +254,9 @@ public class World {
 	 * @return The requested node or null if it wasn't found
 	 */
 	public DTNHost getNodeByAddress(int address) {
+    if (address == -1) {
+      return null;
+    }
 		if (address < 0 || address >= hosts.size()) {
 			throw new SimError("No host for address " + address + ". Address " +
 					"range of 0-" + (hosts.size()-1) + " is valid");

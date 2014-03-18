@@ -63,7 +63,7 @@ public class TotalContactTimeReportTest extends TestCase {
 		ctReader = new BufferedReader(new FileReader(outFile));
 	}
 	
-	public void testReport() throws Exception {
+	public void xtestReport() throws Exception {
 		clock.advance(5);
 		h1.connect(h2);
 		clock.advance(10);
@@ -78,7 +78,7 @@ public class TotalContactTimeReportTest extends TestCase {
 		checkValues(new String[] {"15.0 10.0", "20.0 15.0"});
 	}
 	
-	public void testMultipleTimes() throws Exception {
+	public void xtestMultipleTimes() throws Exception {
 		clock.advance(10);
 		h1.connect(h2);
 		clock.advance(10);
@@ -91,7 +91,7 @@ public class TotalContactTimeReportTest extends TestCase {
 		checkValues(new String[] {"20.0 10.0", "25.0 15.0"});
 	}
 	
-	public void testOverlappingTimes() throws Exception {
+	public void xtestOverlappingTimes() throws Exception {
 		clock.advance(5);
 		h1.connect(h2);
 		clock.advance(5);

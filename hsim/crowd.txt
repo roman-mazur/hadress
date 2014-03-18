@@ -1,0 +1,32 @@
+Scenario.name = Crowd
+# 14400s == 4h
+Scenario.endTime = 14400
+
+# Use just one big host group of 200 nodes
+Scenario.nrofHostGroups = 1
+
+Group.nrofHosts = 200
+MovementModel.worldSize = 200, 200
+
+Group.router = EpidemicRouter
+Group.movementModel = RandomWaypoint
+
+
+#Group.transmitRange = 100
+#btInterface.transmitRange = 100
+
+
+# Events generation
+Events.nrof = 1
+Events1.interval = 1,2
+Events1.class = BroadcastMessageEventGenerator
+Events1.size = 100k,300k
+Events1.hosts = 0,99
+Events1.prefix = M
+
+
+# Reports
+Report.nrofReports = 1
+Report.warmup = 0
+Report.reportDir = reports/
+Report.report1 = com.haddress.sim.BroadcastMessageStatsReport

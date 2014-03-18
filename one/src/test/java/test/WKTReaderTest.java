@@ -60,7 +60,7 @@ public class WKTReaderTest extends TestCase {
 	private WKTMapReader setUpWith(Reader input) {
 		reader = new WKTMapReader(true);
 		try {
-			reader.addPaths(input, 0);
+			reader.addPaths(input, MapNode.MIN_TYPE);
 		} catch (IOException e) {
 			fail(e.toString());			
 		}

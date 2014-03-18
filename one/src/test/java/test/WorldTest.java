@@ -100,7 +100,10 @@ public class WorldTest extends TestCase {
 		assertNrofUpdates(5);
 
 	}
-	
+
+  public void testBroadcastAddress() {
+    assertNull(world.getNodeByAddress(-1));
+  }
 
 	/** Dummy scenario for providing test values for the World */ 
 	private class TestScenario extends core.SimScenario {

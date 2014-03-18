@@ -42,6 +42,9 @@ public class SimpleBroadcastInterface extends NetworkInterface {
 	 * @param anotherInterface The interface to connect to
 	 */
 	public void connect(NetworkInterface anotherInterface) {
+    if (anotherInterface == null) {
+      throw new IllegalArgumentException("null interface");
+    }
 		if (isScanning()  
 				&& anotherInterface.getHost().isRadioActive() 
 				&& isWithinRange(anotherInterface) 
@@ -76,25 +79,29 @@ public class SimpleBroadcastInterface extends NetworkInterface {
 			NetworkInterface anotherInterface = con.getOtherInterface(this);
 
 			// all connections should be up at this stage
-			assert con.isUp() : "Connection " + con + " was down!";
+      if (!con.isUp()) {
+        throw new AssertionError("Connection " + con + " was down!");
+      }
 
 			if (!isWithinRange(anotherInterface)) {
 				disconnect(con,anotherInterface);
 				connections.remove(i);
-			}
-			else {
+			} else {
 				i++;
 			}
 		}
 		// Then find new possible connections
-		Collection<NetworkInterface> interfaces =
-			optimizer.getNearInterfaces(this);
-		for (NetworkInterface i : interfaces) {
-			connect(i);
-		}
+    makePossibleConnections();
 	}
 
-	/** 
+  protected void makePossibleConnections() {
+    Collection<NetworkInterface> interfaces = optimizer.getNearInterfaces(this);
+    for (NetworkInterface i : interfaces) {
+      connect(i);
+    }
+  }
+
+  /**
 	 * Creates a connection to another host. This method does not do any checks
 	 * on whether the other node is in range or active 
 	 * @param anotherInterface The interface to create the connection to

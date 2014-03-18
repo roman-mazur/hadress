@@ -1,0 +1,5 @@
+Scenario.name = [Crowd-10-epidemic;Crowd-10-h;Crowd-30-epidemic;Crowd-30-h;Crowd-50-epidemic;Crowd-50-h;Crowd-90-epidemic;Crowd-90-h]
+#Scenario.endTime = 2000
+
+Group.router = [EpidemicRouter;com.haddress.sim.BroadcastHRouter]
+btInterface.transmitRange = [10;10;30;30;50;50;90;90]

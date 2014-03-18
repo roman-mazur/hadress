@@ -30,13 +30,13 @@ public class MessageStatsReport extends Report implements MessageListener {
 	
 	private int nrofDropped;
 	private int nrofRemoved;
-	private int nrofStarted;
+	protected int nrofStarted;
 	private int nrofAborted;
 	private int nrofRelayed;
-	private int nrofCreated;
+	protected int nrofCreated;
 	private int nrofResponseReqCreated;
 	private int nrofResponseDelivered;
-	private int nrofDelivered;
+	private float nrofDelivered;
 	
 	/**
 	 * Constructor.
@@ -142,13 +142,14 @@ public class MessageStatsReport extends Report implements MessageListener {
 		double deliveryProb = 0; // delivery probability
 		double responseProb = 0; // request-response success probability
 		double overHead = Double.NaN;	// overhead ratio
-		
-		if (this.nrofCreated > 0) {
-			deliveryProb = (1.0 * this.nrofDelivered) / this.nrofCreated;
+
+    float nrofDelivered = getNumberOfSuccessfullyDelivered();
+    if (this.nrofCreated > 0) {
+			deliveryProb = (1.0 * nrofDelivered) / this.nrofCreated;
 		}
-		if (this.nrofDelivered > 0) {
-			overHead = (1.0 * (this.nrofRelayed - this.nrofDelivered)) /
-				this.nrofDelivered;
+		if (nrofDelivered > 0) {
+			overHead = (1.0 * (this.nrofRelayed - nrofDelivered)) /
+          nrofDelivered;
 		}
 		if (this.nrofResponseReqCreated > 0) {
 			responseProb = (1.0* this.nrofResponseDelivered) / 
@@ -161,7 +162,7 @@ public class MessageStatsReport extends Report implements MessageListener {
 			"\naborted: " + this.nrofAborted +
 			"\ndropped: " + this.nrofDropped +
 			"\nremoved: " + this.nrofRemoved +
-			"\ndelivered: " + this.nrofDelivered +
+			"\ndelivered: " + nrofDelivered +
 			"\ndelivery_prob: " + format(deliveryProb) +
 			"\nresponse_prob: " + format(responseProb) + 
 			"\noverhead_ratio: " + format(overHead) + 
@@ -178,5 +179,9 @@ public class MessageStatsReport extends Report implements MessageListener {
 		write(statsText);
 		super.done();
 	}
-	
+
+  protected float getNumberOfSuccessfullyDelivered() {
+    return this.nrofDelivered;
+  }
+
 }

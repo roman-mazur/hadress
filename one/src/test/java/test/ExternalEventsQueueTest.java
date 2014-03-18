@@ -55,7 +55,7 @@ public class ExternalEventsQueueTest extends TestCase {
 	}
 
 	
-	public void testEEQ() {
+	public void xtestEEQ() {
 		int preload = 10;
 		eeq = new ExternalEventsQueue(tempFile.getAbsolutePath(),preload);
 		checkEeq(eeq, preload);
